@@ -27,6 +27,41 @@
             box-shadow: rgba(100, 100, 111, 0.2) 4px 10px 29px 4px;
             background-color: #e1e1e1;
         }
+
+        #items-list {
+            width: 60vw;
+            list-style: none;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+
+        .page-content {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .product-image {
+            max-width: 240px;
+            width: 240px;
+        }
+
+        .product-item {
+            max-width: 240px;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin: 2px 4px 2px 4px;
+            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 16px 0px;
+        }
+
+        .product-name {
+            font-size: 16px;
+        }
+
+        .product-price {
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -49,14 +84,16 @@
     </nav>
     <h1>Shop</h1>
 
-    <ul id="category-list">
-<!--        <li>Category 1</li>-->
-<!--        <li>Category 2</li>-->
-    </ul>
+    <main class="page-content">
+        <ul id="category-list">
+            <!--        <li>Category 1</li>-->
+            <!--        <li>Category 2</li>-->
+        </ul>
 
-    <ul id="items-list">
+        <ul id="items-list">
 
-    </ul>
+        </ul>
+    </main>
 
     <script>
         const categoryListEl = document.getElementById("category-list")
@@ -78,7 +115,28 @@
                 console.log(productList)
                 for (const product of productList.products) {
                     const listItem = document.createElement('li')
-                    listItem.innerText = product.title
+                    listItem.classList.add('product-item')
+
+                    const itemCard = document.createElement('div')
+                    itemCard.classList.add('product-card')
+
+                    const itemName = document.createElement('p')
+                    itemName.classList.add('product-name')
+                    itemName.innerText = product.title
+
+                    const itemPrice = document.createElement('p')
+                    itemPrice.classList.add('product-price')
+                    itemPrice.innerText = `$${product.price}`
+
+                    const itemImage = document.createElement('img')
+                    itemImage.classList.add('product-image')
+                    itemImage.src = product.thumbnail
+
+                    itemCard.appendChild(itemImage)
+                    itemCard.appendChild(itemName)
+                    itemCard.appendChild(itemPrice)
+
+                    listItem.appendChild(itemCard)
                     itemsListEl.appendChild(listItem)
                 }
             });
